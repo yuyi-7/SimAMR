@@ -65,7 +65,7 @@ class Modulation:
         data_noise = data + noise
         return data_noise
     
-    def create_baseband(self):
+    def create_baseband(self, nb=None):
         """
         create baseband signal in randomly
         :return: randomly baseband signal
@@ -74,7 +74,11 @@ class Modulation:
         self.N = len(self.__t)
         
         # 调用随机函数产生任意在0到1的1*nb的矩阵，大于0.5显示为1，小于0.5显示为0
-        data = [1 if x > 0.5 else 0 for x in np.random.randn(1, self.__nb)[0]]
+        if nb is None:
+            num = self.__nb
+        else:
+            num = nb
+        data = [1 if x > 0.5 else 0 for x in np.random.randn(1, num)[0]]
         return data
     
     def create_qpsk_mod_signal(self, data):
@@ -136,6 +140,17 @@ class Modulation:
         qpsk_wave_noise = self.add_noise(qpsk_wave, self.__SNR)
         return qpsk_wave_noise, data, idata, qdata
     
+    def get_QPSK_iq(self):
+        """
+        get QPSK IQ signal with noise
+        :return: wave of qpsk, baseband data, in_phase data and quadrature data
+        """
+        data = self.create_baseband()
+        idata, qdata = self.create_qpsk_mod_signal(data)
+        idata_noise = self.add_noise(idata, self.__SNR)
+        qdata_noise = self.add_noise(qdata, self.__SNR)
+        return idata_noise, qdata_noise
+    
     @staticmethod
     def create_bpsk_mod_signal(data):
         """
@@ -168,6 +183,17 @@ class Modulation:
         bpsk_wave = self.create_bpsk_wave(data_nrz)
         bpsk_wave_noise = self.add_noise(bpsk_wave, self.__SNR)
         return bpsk_wave_noise, data, data_nrz
+    
+    def get_BPSK_iq(self):
+        """
+        get BPSK IQ signal with noise
+        :return: wave of qpsk, baseband data, in_phase data and quadrature data
+        """
+        data = self.create_baseband()
+        qdata = self.create_bpsk_mod_signal(data)
+        idata_noise = self.add_noise(np.zeros(len(qdata)), self.__SNR)
+        qdata_noise = self.add_noise(qdata, self.__SNR)
+        return idata_noise, qdata_noise
     
     def create_8psk_mod_signal(self, data):
         """
@@ -219,6 +245,17 @@ class Modulation:
         psk8_wave = self.create_psk_wave(idata, qdata, n=3)
         psk8_wave_noise = self.add_noise(psk8_wave, self.__SNR)
         return psk8_wave_noise, data, idata, qdata
+    
+    def get_8PSK_iq(self):
+        """
+        get 8PSK IQ signal with noise
+        :return: wave of qpsk, baseband data, in_phase data and quadrature data
+        """
+        data = self.create_baseband()
+        idata, qdata = self.create_8psk_mod_signal(data)
+        idata_noise = self.add_noise(idata, self.__SNR)
+        qdata_noise = self.add_noise(qdata, self.__SNR)
+        return idata_noise, qdata_noise
     
     def create_16qam_mod_signal(self, data):
         """
@@ -294,3 +331,15 @@ class Modulation:
         qam16_wave = self.create_psk_wave(idata, qdata, n=4)
         qam16_wave_noise = self.add_noise(qam16_wave, self.__SNR)
         return qam16_wave_noise, data, idata, qdata
+    
+    def get_16QAM_iq(self):
+        """
+        get 16QAM IQ signal with noise
+        :return: wave of qpsk, baseband data, in_phase data and quadrature data
+        """
+        data = self.create_baseband()
+        idata, qdata = self.create_16qam_mod_signal(data)
+        idata_noise = self.add_noise(idata, self.__SNR)
+        qdata_noise = self.add_noise(qdata, self.__SNR)
+        return idata_noise, qdata_noise
+    
