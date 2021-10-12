@@ -4,6 +4,8 @@ from modulation import *
 from keras.callbacks import ModelCheckpoint, ReduceLROnPlateau, TensorBoard
 from keras.utils import to_categorical
 from matplotlib import pyplot as plt
+import seaborn as sns
+from sklearn.metrics import confusion_matrix, accuracy_score
 import time
 from keras import backend as K
 K.set_image_dim_ordering('th')
@@ -13,8 +15,8 @@ sample_long = 128  # 每个样本多长
 output_num = 4  # 模型输出大小，识别调制方式数量
 fs = 200  # 采样率
 fc = 4  # 载波频率
-SNR = 20  # 信噪比
-train_rate = 1  # 训练集比例
+SNR = 10  # 信噪比
+train_rate = 0.8  # 训练集比例
 
 # 生成数据
 x, y = generate_data(fs, fc, SNR, single_sample_num, sample_long)
@@ -40,7 +42,7 @@ tensorb = TensorBoard(log_dir='./borad', write_grads=True, write_images=True)
 history = model.fit(x_train,
                     y_train,
                     batch_size=32,
-                    epochs=300,
+                    epochs=70,
                     validation_split=0.2,
                     callbacks=[reduce_lr, tensorb],
                     verbose=1
@@ -50,22 +52,40 @@ history = model.fit(x_train,
 his = history.history
 plt.plot(his['acc'])
 plt.plot(his['val_acc'])
-plt.title('Model accuracy')
+plt.title('Model accuracy SNR='+str(SNR))
 plt.ylabel('Accuracy')
 plt.xlabel('Epoch')
 plt.legend(['Train', 'Test'], loc='upper left')
 plt.show()
-fig_name = './model_acc' + time.strftime('%m-%d %H:%M', time.localtime()) + '.jpg'
+fig_name = './model_acc_SNR' + str(SNR) + time.strftime('%m-%d %H:%M', time.localtime()) + '.jpg'
 plt.savefig(fig_name)
 
 # 绘制训练验证的损失
 his = history.history
 plt.plot(his['loss'])
 plt.plot(his['val_loss'])
-plt.title('Model loss')
+plt.title('Model loss SNR='+str(SNR))
 plt.ylabel('Loss')
 plt.xlabel('Epoch')
 plt.legend(['Train', 'Test'], loc='upper left')
 plt.show()
-fig_name = './model_loss' + time.strftime('%m-%d %H:%M', time.localtime()) + '.jpg'
+fig_name = './model_loss_SNR' + str(SNR) + time.strftime('%m-%d %H:%M', time.localtime()) + '.jpg'
 plt.savefig(fig_name)
+
+# 画混淆矩阵
+y_test_pred = model.predict(x_test)
+none_cate_y_test = list(map(np.argmax, y_test))
+none_cate_y_test_pred = list(map(np.argmax, y_test_pred))
+c = confusion_matrix(none_cate_y_test, none_cate_y_test_pred)
+fig, ax = plt.subplots()
+sns.heatmap(c, annot=True, ax=ax)
+ax.set_title('confusion matrix snr='+str(SNR))
+ax.set_xlabel('Predict')
+ax.set_ylabel('True')
+fig_name = './ConfusionMatrix_SNR' + str(SNR) + time.strftime('%m-%d %H:%M', time.localtime()) + '.jpg'
+fig.savefig(fig_name)
+
+# 计算准确率
+test_acc = accuracy_score(none_cate_y_test, none_cate_y_test_pred)
+print('test accuracy:')
+print(test_acc)
