@@ -15,7 +15,7 @@ sample_long = 128  # 每个样本多长
 output_num = 4  # 模型输出大小，识别调制方式数量
 fs = 200  # 采样率
 fc = 4  # 载波频率
-SNR = 10  # 信噪比
+SNR = 5  # 信噪比
 train_rate = 0.8  # 训练集比例
 
 # 生成数据
@@ -57,7 +57,7 @@ plt.ylabel('Accuracy')
 plt.xlabel('Epoch')
 plt.legend(['Train', 'Test'], loc='upper left')
 plt.show()
-fig_name = './model_acc_SNR' + str(SNR) + time.strftime('%m-%d %H:%M', time.localtime()) + '.jpg'
+fig_name = './model_acc_SNR' + str(SNR) + '_' + time.strftime('%m-%d_%H-%M', time.localtime()) + '.jpg'
 plt.savefig(fig_name)
 
 # 绘制训练验证的损失
@@ -69,7 +69,7 @@ plt.ylabel('Loss')
 plt.xlabel('Epoch')
 plt.legend(['Train', 'Test'], loc='upper left')
 plt.show()
-fig_name = './model_loss_SNR' + str(SNR) + time.strftime('%m-%d %H:%M', time.localtime()) + '.jpg'
+fig_name = './model_loss_SNR' + str(SNR) + '_' + time.strftime('%m-%d_%H-%M', time.localtime()) + '.jpg'
 plt.savefig(fig_name)
 
 # 画混淆矩阵
@@ -82,7 +82,7 @@ sns.heatmap(c, annot=True, ax=ax)
 ax.set_title('confusion matrix snr='+str(SNR))
 ax.set_xlabel('Predict')
 ax.set_ylabel('True')
-fig_name = './ConfusionMatrix_SNR' + str(SNR) + time.strftime('%m-%d %H:%M', time.localtime()) + '.jpg'
+fig_name = './ConfusionMatrix_SNR' + str(SNR) + '_' + time.strftime('%m-%d_%H-%M', time.localtime()) + '.jpg'
 fig.savefig(fig_name)
 
 # 计算准确率
