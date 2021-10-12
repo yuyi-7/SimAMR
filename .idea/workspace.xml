@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="242cb7da-c201-452b-88a9-e5853e0d09b4" name="默认更改列表" comment="add confusion matrix and test acc, add some reminders">
+    <list default="true" id="242cb7da-c201-452b-88a9-e5853e0d09b4" name="默认更改列表" comment="fix figure save">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/train.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -201,8 +202,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.train" />
-        <item itemvalue="Python.create_data" />
         <item itemvalue="Python.test" />
+        <item itemvalue="Python.create_data" />
         <item itemvalue="Python.modulation" />
       </list>
     </recent_temporary>
@@ -219,7 +220,7 @@
       <option name="presentableId" value="Default" />
       <updated>1633849866741</updated>
       <workItem from="1633946989116" duration="924000" />
-      <workItem from="1634021573798" duration="12821000" />
+      <workItem from="1634021573798" duration="20069000" />
     </task>
     <task id="LOCAL-00001" summary="add drcnn leave create_data to edit">
       <created>1633946113716</created>
@@ -242,7 +243,14 @@
       <option name="project" value="LOCAL" />
       <updated>1634034808213</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="fix figure save">
+      <created>1634036438085</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1634036438085</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -282,11 +290,12 @@
     <MESSAGE value="add drcnn leave create_data to edit" />
     <MESSAGE value="complete create_data and train" />
     <MESSAGE value="add confusion matrix and test acc, add some reminders" />
-    <option name="LAST_COMMIT_MESSAGE" value="add confusion matrix and test acc, add some reminders" />
+    <MESSAGE value="fix figure save" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix figure save" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/SimAMR$train.coverage" NAME="train Coverage Results" MODIFIED="1634033381657" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/SimAMR$test.coverage" NAME="test Coverage Results" MODIFIED="1634025424455" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/SimAMR$train.coverage" NAME="train Coverage Results" MODIFIED="1634045273155" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/SimAMR$test.coverage" NAME="test Coverage Results" MODIFIED="1634047877306" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/SimAMR$create_data.coverage" NAME="create_data Coverage Results" MODIFIED="1634026461626" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="editorHistoryManager">

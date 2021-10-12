@@ -1,4 +1,7 @@
 from modulation import *
+from sklearn.metrics import confusion_matrix
+import seaborn as sns
+from matplotlib import pyplot as plt
 
 T = 1               #基带信号宽度
 nb = 128            #定义传输的比特数
@@ -20,7 +23,19 @@ SNR = 10             #信噪比
 # print(qdata[:5])
 # print(len(qpsk_wave))
 
-m = Modulation(nb, fs, fc, SNR)
-bpsk_wave, data, idata, qdata = m.modulate_16QAM()
+# m = Modulation(nb, fs, fc, SNR)
+# bpsk_wave, data, idata, qdata = m.modulate_16QAM()
+#
+# print(len(idata))
 
-print(len(idata))
+a = np.array([0,2,1,2,3,3])
+b = np.array([0,2,1,1,2,2])
+c = confusion_matrix(a, b)
+fig, ax = plt.subplots()
+sns.heatmap(c, annot=True, ax=ax)
+ax.set_title('confusion matrix SNR='+str(SNR))
+ax.set_xlabel('Predict')
+ax.set_ylabel('True')
+ax.set_xticklabels(['bpsk', 'qpsk', '8psk', '16qam'])
+ax.set_yticklabels(['bpsk', 'qpsk', '8psk', '16qam'])
+plt.show()
